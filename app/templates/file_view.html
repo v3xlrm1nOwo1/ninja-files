@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Ninja Files{% endblock %}
+ 
+{% block main %}
+
+<dir class="mb-4" style="align-items: center; margin-top: 40px;">
+<div class="paragraphs">
+    <div class="row">
+      <div class="span4">
+
+        <div class="col-lg-4 mb-3 span4">
+            <img style="float:left;" class="img-thumbnail" src="{{ url_for('static', filename='uploads/Image/' + file.cover_image) }}"/>
+        </div>
+
+        <div class="content-heading text-right" style="float: 300px; margin-left: 400px;">
+            
+            <p class="text-monospace mb-4">- File Name: {{ file.name }}</p>
+        
+            <p class="text-monospace mb-4">- Bio: {{ file.bio }}</p>
+        
+            <p class="text-monospace mb-4">- File Type: {{ file.file_type|title }} - {{ file.extension }}</p>
+
+            <p class="text-monospace mb-4">- Upload By: 
+            <a href="{{ url_for('user_view', username=user.username) }}"
+                class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" class="img-thumbnail">
+                {{ user.username }}
+            </a>
+          </p>
+        
+            <a href="{{ url_for('download', file_id=file.id) }}" class="col-md-1">
+                <div class="mb-4 btn btn-primary text-right">Download</div>
+            </a>
+
+            {% if do %}
+            <a href="{{ url_for('delete', id=file.id) }}" class="mb-4 btn btn-secondary">Delete
+                file</a>
+            {% endif %}
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</dir>
+{% endblock main %}

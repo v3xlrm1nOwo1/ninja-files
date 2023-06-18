@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Ninja Files{% endblock %}
+ 
+{% block main %}
+
+<dir class="mb-4" style="align-items: center; margin-top: 40px;">
+    <div class="paragraphs">
+        <div class="row">
+          <div class="span4">
+    
+            <div class="col-lg-2  mb-4 span4">
+                <img style="float:left;" class="img-thumbnail" src="{{ url_for('static', filename='img/') }}{{ user.profile_pic }}"/>
+            </div>
+    
+            <div class="content-heading text-right mb-4" style="float: 300px; margin-left: 250px;">
+                
+                <p class="text-monospace mb-4">Name: {{ user.first_name }} {{ user.last_name }}</p>
+            
+                <p class="text-monospace mb-4">Username: {{ user.username }}</p>
+            
+                <p class="text-monospace mb-4">Bio: {{ user.bio }}</p>
+
+                {% if current_user.username == user.username %}
+                <a href="{{ url_for('profile', id=user.id) }}" class="mb-4 btn btn-secondary">Edit 
+                    Profile</a>
+                {% endif %}
+    
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </dir>
+
+<hr>
+
+<h3 class="text-monospace mb-4 center" style="text-align: center;" >Upload By: {{ user.username }}</h3>
+    <div class="row" style="margin-top: 70px;">
+        
+        {% for file in files %}
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a href="{{ url_for('file_view', file_id=file.id) }}" class="fancybox" rel="ligthbox">
+                <img src="{{ url_for('static', filename='uploads/Image/' + file.cover_image) }}" class="zoom img-fluid "
+                    alt="{{ file.bio }}">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock main %}

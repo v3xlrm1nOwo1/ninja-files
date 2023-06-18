@@ -1,0 +1,48 @@
+{% macro render_pagination(pagination, endpoint, current_file_type='ALL', current_file_extension='ALL') %}
+<!-- <div class=page-items>
+    {{ pagination.first }} - {{ pagination.last }} of {{ pagination.total }} --- {{ pagination.prev_num }} --- {{ pagination.next_num }}
+  </div>
+  <div class=pagination>
+    {% for page in pagination.iter_pages() %}
+      {% if page %}
+        {% if page != pagination.page %}
+          <a href="{{ url_for(endpoint, page=page, file_type=current_file_type, file_extension=current_file_extension) }}">{{ page }}</a>
+        {% else %}
+          <strong>{{ page }}</strong>
+        {% endif %}
+      {% else %}
+        <span class=ellipsis>…</span>
+      {% endif %}
+    {% endfor %}
+  </div> -->
+
+  <nav aria-label="...">
+    <div class=" pagination page-items justify-content-center">
+        {{ pagination.first }} - {{ pagination.last }} of {{ pagination.total }}
+      </div>
+    <ul class="pagination justify-content-center">
+        
+        {% if pagination.has_prev %}
+            <li class="page-item active"> <a class="page-link" href="{{ url_for(endpoint, page=pagination.prev_num, file_type=current_file_type, file_extension=current_file_extension) }}">Previous</a></li>
+        {% else %}
+            <li class="page-item active"><a class="page-link btn" href="{{ url_for(endpoint, page=pagination.prev_num, file_type=current_file_type, file_extension=current_file_extension) }}">Previous</a></li>
+        {% endif %}
+
+        {% for page in pagination.iter_pages() %}
+            {% if page == pagination.page %}
+                <li class="page-item active"> <a class="page-link" href="{{ url_for(endpoint, page=page, file_type=current_file_type, file_extension=current_file_extension) }}">{{ page }}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link btn" href="{{ url_for(endpoint, page=page, file_type=current_file_type, file_extension=current_file_extension) }}">{{ page }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if pagination.has_next %}
+            <li class="page-item active"> <a class="page-link" href="{{ url_for(endpoint, page=pagination.next_num, file_type=current_file_type, file_extension=current_file_extension) }}">Next</a></li>
+        {% else %}
+            <li class="page-item active"><a class="page-link btn" href="{{ url_for(endpoint, page=pagination.next_num, file_type=current_file_type, file_extension=current_file_extension) }}">Next</a></li>
+        {% endif %}
+
+    </ul>
+  </nav>
+
+{% endmacro %}

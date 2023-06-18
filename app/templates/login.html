@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Log in{% endblock %}
+
+{% block main %}
+<br>
+<div class="col-lg-10 md-4" style="align-items: center;">
+    <h1>Log in</h1>
+    
+    <form action="{{ url_for('login') }}" method="POST">
+    
+        <div class="col-auto mb-4">
+            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">@</div>
+              </div>
+              <input type="text" name="username" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+            </div>
+        </div>
+    
+        <div class="form-group mb-4">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+    
+        <div class="form-group mb-4">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+        </div>
+    
+        <button type="submit" class="btn btn-primary mb-4">Login</button>
+    
+      </form>
+      <small>If have not account <a href="{{ url_for('singup') }}" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">Sing Up</a></small>
+    </div>
+
+{% endblock main %}
