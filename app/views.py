@@ -226,7 +226,7 @@ def download(file_id):
     filename = file.file_type + '/' + file.name
     
     try:
-        return send_from_directory(directory=app.config['UPLOAD_FOLDER'], path=filename, as_attachment=True, current_user=current_user)
+        return send_from_directory(directory=app.config['UPLOAD_FOLDER'], path=filename, as_attachment=True)
     
     except FileNotFoundError:
         abort(404)
